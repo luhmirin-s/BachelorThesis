@@ -13,30 +13,41 @@ namespace RobotSimulationController.NN
          * Each in hidden layer is connected with each in output layer. 
          * 12 connections in total.
          */
-        private const int HIDDEN_NEURON_COUNT = 5;
-        private const int NEURON_COUNT = 2 + HIDDEN_NEURON_COUNT + 2;
+        public const int HIDDEN_NEURON_COUNT = 5;
+        public const int NEURON_COUNT = 2 + HIDDEN_NEURON_COUNT + 2;
 
-        private const int LINK_COUNT = 2 * HIDDEN_NEURON_COUNT * 2;
+        public const int LINK_COUNT = 2 * HIDDEN_NEURON_COUNT * 2;
 
         public SimpleNN()
         {
-            Weights = new float[LINK_COUNT];
+            Weights = getRandomizedWeights();
             InitNetwork();
+        }
+
+        public SimpleNN(float[] weights)
+        {
+            Weights = weights;
+            InitNetwork();
+        }
+
+        public static float[] getRandomizedWeights()
+        {
+            float[] tmp = new float[LINK_COUNT]; 
+            // randomize weights
+            for (int ii = 0; ii < LINK_COUNT; ii++)
+            {
+                tmp[ii] = (float)(Rand.NextDouble());
+            }
+            return tmp;
         }
 
         protected override void InitNetwork()
         {
-            // randomize weights
-            for (int ii = 0; ii < LINK_COUNT; ii++)
-            {
-                Weights[ii] = (float)(Rand.NextDouble());
-            }
             // Creating neurons
             for (int ii = 0; ii < NEURON_COUNT; ii++)
             {
                 Neurons.Add(new Neuron(ii));
             }
-            
             // Adding link btween neurons
             int jj = 0;
             // input to hidden layer

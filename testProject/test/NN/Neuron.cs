@@ -63,7 +63,6 @@ namespace RobotSimulationController.NN
 
             Value += Bias * BiasWeight;
             Value = ActivationFunction.Compute(Value);
-            Console.WriteLine(Index + ". neuron value is " + Value);
         }
 
     }

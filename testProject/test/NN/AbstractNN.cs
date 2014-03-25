@@ -16,7 +16,7 @@ namespace RobotSimulationController.NN
             set;
         }
 
-        protected Random Rand = new Random();
+        protected static Random Rand = new Random();
 
         public AbstractNN()
         {

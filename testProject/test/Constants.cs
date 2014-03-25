@@ -18,5 +18,8 @@ namespace RobotSimulationController
         public const String RIGHT_SENSOR = "zone_right/device0";
 
         public const String BASE = "robot_base";
+
+        public const float DISTANCE_TO_FINISH = 10f;
+    
     }
 }

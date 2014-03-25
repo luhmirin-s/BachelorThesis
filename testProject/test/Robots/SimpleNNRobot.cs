@@ -1,4 +1,5 @@
 ﻿using Moda;
+using RobotSimulationController.GA;
 using RobotSimulationController.NN;
 using System;
 using System.Collections.Generic;
@@ -13,11 +14,18 @@ namespace RobotSimulationController
 
         private SimpleNN Network;
 
+        public SimpleNNRobot(RobotPHX robot, Genome genome)
+        {
+            Robot = robot;
+            Genotype = genome;
+            Network = new SimpleNN(Genotype.getWeights());
+        }
+
         public SimpleNNRobot(RobotPHX robot)
         {
             Robot = robot;
-            Network = new SimpleNN();
-
+            Genotype = new Genome(SimpleNN.getRandomizedWeights());
+            Network = new SimpleNN(Genotype.getWeights());
         }
 
         public override void ComputeStep()
@@ -46,6 +54,17 @@ namespace RobotSimulationController
             }
 
             return sb.ToString();
+        }
+
+        public override Genome getGenome()
+        {
+            return base.getGenome();
+        }
+
+        public override void setGenome(Genome genome)
+        {
+            base.setGenome(genome);
+            Network = new SimpleNN(Genotype.getWeights());
         }
     }
 }

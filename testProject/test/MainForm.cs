@@ -14,6 +14,7 @@ namespace RobotSimulationController
     public partial class MainForm : Form
     {
         delegate void SetTextCallback(Label label, string text);
+        delegate void SetButtonTextCallback(Button label, string text);
 
         private Moda.Connection Connection;
         private Moda.RobotPHX Phx;
@@ -68,8 +69,7 @@ namespace RobotSimulationController
         private void prepareNewController()
         {
             Controller = new ProcessController(this);
-            Controller.setRobot(typeRobot, Phx);
-
+            Controller.SetRobotType(typeRobot, Phx);
         }
 
         //####################################################################
@@ -77,6 +77,7 @@ namespace RobotSimulationController
         {
             prepareNewController();
             Controller.start(Connection);
+
             buttonStart.Enabled = false;
             buttonStop.Enabled = true;
             groupRobots.Enabled = false;
@@ -85,40 +86,50 @@ namespace RobotSimulationController
         private void buttonStop_Click(object sender, EventArgs e)
         {
             Controller.stop();
-            buttonStart.Enabled = true;
             buttonStop.Enabled = false;
+            buttonStop.Text = "Finishing...";
+            buttonStart.Enabled = true;
             groupRobots.Enabled = true;
         }
 
         //##############################################################################
 
-        public void SetMotorCheckResults(bool checkResult)
+        public void EvolutionStop()
         {
-            labelMotorStatus.Text = "Motor status: " + (checkResult ? "OK" : "Fail");
+            SetButtonTextSafely(buttonStop, "Stop");
         }
 
-        public void SetSensorCheckResults(bool checkResult)
+        public void AddGenerationInfo(string s)
         {
-            labelSensorStatus.Text = "Motor status: " + (checkResult ? "OK" : "Fail");
+            AppendTextBox(s + "\r\n");
         }
+        //public void SetMotorCheckResults(bool checkResult)
+        //{
+        //    labelMotorStatus.Text = "Motor status: " + (checkResult ? "OK" : "Fail");
+        //}
 
-        public void SetMotorSpeed(float lm, float rm)
-        {
-            String text = ("Motor speed:\n               left: " + lm + "\n             right: " + rm);
-            SetTextSafely(labelMotorSpeed, text);
-        }
+        //public void SetSensorCheckResults(bool checkResult)
+        //{
+        //    labelSensorStatus.Text = "Motor status: " + (checkResult ? "OK" : "Fail");
+        //}
 
-        public void SetSensorResults(float ld, float rd)
-        {
-            String text = ("Sensor results: \n                 left: " + ld + "\n               right: " + rd);
-            SetTextSafely(labelSensorResults, text);
-        }
+        //public void SetMotorSpeed(float lm, float rm)
+        //{
+        //    String text = ("Motor speed:\n               left: " + lm + "\n             right: " + rm);
+        //    SetTextSafely(labelMotorSpeed, text);
+        //}
 
-        public void SetCurrentPosition(float positionX, float positionZ)
-        {
-            String text = ("Current position:  X: " + positionX + "  Z: " + positionZ);
-            SetTextSafely(labelPosition, text);
-        }
+        //public void SetSensorResults(float ld, float rd)
+        //{
+        //    String text = ("Sensor results: \n                 left: " + ld + "\n               right: " + rd);
+        //    SetTextSafely(labelSensorResults, text);
+        //}
+
+        //public void SetCurrentPosition(float positionX, float positionZ)
+        //{
+        //    String text = ("Current position:  X: " + positionX + "  Z: " + positionZ);
+        //    SetTextSafely(labelPosition, text);
+        //}
 
         private void SetTextSafely(Label label, string text)
         {
@@ -132,6 +143,29 @@ namespace RobotSimulationController
                 label.Text = text;
             }
         }
+
+        public void AppendTextBox(string value)
+        {
+            if (InvokeRequired)
+            {
+                this.Invoke(new Action<string>(AppendTextBox), new object[] { value });
+                return;
+            }
+            textWeights.Text += value;
+        }
+
+        private void SetButtonTextSafely(Button button, string text)
+        {
+            if (button.InvokeRequired)
+            {
+                SetButtonTextCallback d = new SetButtonTextCallback(SetButtonTextSafely);
+                Invoke(d, new object[] { button, text });
+            }
+            else
+            {
+                button.Text = text;
+            }
+        }
         //#############################################################################
         private void radioStupidRobot_CheckedChanged(object sender, EventArgs e)
         {
@@ -142,7 +176,7 @@ namespace RobotSimulationController
         {
             typeRobot = RobotType.SIMPLE_NN;
         }
-
+        
     }
 
 }

@@ -1,4 +1,5 @@
 ﻿using Moda;
+using RobotSimulationController.GA;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Windows.Forms;
 
 namespace RobotSimulationController
 {
-    abstract class AbstractRobot
+    abstract class AbstractRobot : ICloneable
     {
         // Used to post robots device status
         public delegate void MotorsCheckedHandler(bool checkResult);
@@ -40,6 +41,15 @@ namespace RobotSimulationController
 
         // Robot base geometry to retrieve and set position
         protected Geom RobotGeometry;
+
+        // Some fitness function evaluation result for this robot
+        public float FitnessValue
+        {
+            get;
+            set;
+        }
+
+        protected Genome Genotype;
 
         protected AbstractRobot()
         {
@@ -166,7 +176,6 @@ namespace RobotSimulationController
             float rd = RightSensor.GetMeasure();
 
             // Here we send sensor results to form.
-            Console.WriteLine("sensors: " + ld + " " + rd);
             PostSensorReadings(ld, rd);
 
             return new float[] { ld, rd };
@@ -177,5 +186,25 @@ namespace RobotSimulationController
             return "N/A";
         }
 
+        public Vector3 getPosition()
+        {
+            return RobotGeometry.GetPosition();
+        }
+
+        public virtual Genome getGenome()
+        {
+            return Genotype;
+        }
+
+        public virtual void setGenome(Genome genome)
+        {
+            Genotype = genome;
+        }
+
+
+        public object Clone()
+        {
+            return this.MemberwiseClone();
+        }
     }
 }

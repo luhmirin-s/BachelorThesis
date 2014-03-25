@@ -182,14 +182,14 @@ namespace RobotSimulationController
             this.textWeights.Name = "textWeights";
             this.textWeights.ReadOnly = true;
             this.textWeights.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textWeights.Size = new System.Drawing.Size(121, 261);
+            this.textWeights.Size = new System.Drawing.Size(400, 261);
             this.textWeights.TabIndex = 11;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(515, 314);
+            this.ClientSize = new System.Drawing.Size(788, 314);
             this.Controls.Add(this.textWeights);
             this.Controls.Add(this.groupRobots);
             this.Controls.Add(this.labelPosition);
