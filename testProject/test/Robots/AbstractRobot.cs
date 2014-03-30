@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace RobotSimulationController
 {
-    abstract class AbstractRobot : ICloneable
+    abstract class AbstractRobot
     {
         // Used to post robots device status
         public delegate void MotorsCheckedHandler(bool checkResult);
@@ -201,10 +201,6 @@ namespace RobotSimulationController
             Genotype = genome;
         }
 
-
-        public object Clone()
-        {
-            return this.MemberwiseClone();
-        }
+        public abstract AbstractRobot Clone();
     }
 }

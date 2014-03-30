@@ -66,5 +66,10 @@ namespace RobotSimulationController
             base.setGenome(genome);
             Network = new SimpleNN(Genotype.getWeights());
         }
+
+        public override AbstractRobot Clone()
+        {
+            return new SimpleNNRobot(this.Robot, this.getGenome());
+        }
     }
 }

@@ -8,7 +8,6 @@ namespace RobotSimulationController.GA
     class Allel
     {
         const int MAX = 0xFFFF;
-        const int HALF = 0xFF;
 
         public byte[] Genes
         {
@@ -30,6 +29,20 @@ namespace RobotSimulationController.GA
         {
             int tmp = (Genes[1] | ((int)Genes[0] << 8));
             return (float)tmp / MAX;
+        }
+
+        public void FlipBit(bool inLowerByte, int index)
+        {
+            int ii = inLowerByte ? 1 : 0;
+            Genes[ii] = (byte) (Genes[ii] ^ (0x1 << index));
+        }
+
+        public void SwitchBytes()
+        {
+            byte tmp;
+            tmp = Genes[0];
+            Genes[0] = Genes[1];
+            Genes[1] = tmp;
         }
 
     }

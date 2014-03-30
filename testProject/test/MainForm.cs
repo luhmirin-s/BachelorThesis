@@ -21,7 +21,7 @@ namespace RobotSimulationController
 
         private ProcessController Controller;
 
-        private RobotType typeRobot = RobotType.STUPID;
+        private RobotType typeRobot = RobotType.SIMPLE_NN;
 
         public MainForm()
         {
@@ -103,33 +103,6 @@ namespace RobotSimulationController
         {
             AppendTextBox(s + "\r\n");
         }
-        //public void SetMotorCheckResults(bool checkResult)
-        //{
-        //    labelMotorStatus.Text = "Motor status: " + (checkResult ? "OK" : "Fail");
-        //}
-
-        //public void SetSensorCheckResults(bool checkResult)
-        //{
-        //    labelSensorStatus.Text = "Motor status: " + (checkResult ? "OK" : "Fail");
-        //}
-
-        //public void SetMotorSpeed(float lm, float rm)
-        //{
-        //    String text = ("Motor speed:\n               left: " + lm + "\n             right: " + rm);
-        //    SetTextSafely(labelMotorSpeed, text);
-        //}
-
-        //public void SetSensorResults(float ld, float rd)
-        //{
-        //    String text = ("Sensor results: \n                 left: " + ld + "\n               right: " + rd);
-        //    SetTextSafely(labelSensorResults, text);
-        //}
-
-        //public void SetCurrentPosition(float positionX, float positionZ)
-        //{
-        //    String text = ("Current position:  X: " + positionX + "  Z: " + positionZ);
-        //    SetTextSafely(labelPosition, text);
-        //}
 
         private void SetTextSafely(Label label, string text)
         {
@@ -167,11 +140,7 @@ namespace RobotSimulationController
             }
         }
         //#############################################################################
-        private void radioStupidRobot_CheckedChanged(object sender, EventArgs e)
-        {
-            typeRobot = RobotType.STUPID;
-        }
-        
+
         private void radioSimpleNNRobot_CheckedChanged(object sender, EventArgs e)
         {
             typeRobot = RobotType.SIMPLE_NN;

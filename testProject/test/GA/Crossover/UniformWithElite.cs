@@ -1,31 +1,45 @@
-﻿using System;
+﻿using RobotSimulationController.GA.Mutation;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace RobotSimulationController.GA.Crossover
 {
-    class CrossoverMechanism
+    class UniformWithElite : ICrossoverMechanism
     {
-        const float PERCENT_OF_BEST = 0.4f;
-        const float MAX_CHILD_COUNT = 10;
 
-        Random rand = new Random();
+        const int ELITE_SIZE = 2;
+        const int MAX_CHILD_COUNT = ProcessController.POPULATION_SIZE;
 
-        public List<AbstractRobot> createNewPopulation(List<AbstractRobot> oldPopulation)
+        protected Random Random = new Random();
+        private IMutation Mutation;
+
+        public List<AbstractRobot> CreateNewPopulation(List<AbstractRobot> oldPopulation, IMutation mutation)
         {
+            Mutation = mutation;
+
             SortPopulation(oldPopulation);
-            oldPopulation = ChooseNewParents(oldPopulation);
+            oldPopulation = ChooseBestIndividual(oldPopulation);
 
-            List<AbstractRobot> newPopulation = new List<AbstractRobot>();
+            List<AbstractRobot> offsprings = GenerateOffsprings(oldPopulation);
 
-            CreateNewPopulation(oldPopulation, newPopulation);
+            addElite(oldPopulation, offsprings);
 
-            return newPopulation;
+            return offsprings;
         }
 
-        private void CreateNewPopulation(List<AbstractRobot> oldPopulation, List<AbstractRobot> newPopulation)
+        private static void addElite(List<AbstractRobot> oldPopulation, List<AbstractRobot> newPopulation)
         {
+            newPopulation.AddRange(oldPopulation.GetRange(0, ELITE_SIZE));
+        }
+
+        private List<AbstractRobot> GenerateOffsprings(List<AbstractRobot> oldPopulation)
+        {
+            List<AbstractRobot> newPopulation = new List<AbstractRobot>();
+
+            AbstractRobot prototype = oldPopulation[0];
+
             Console.WriteLine("Starting crossover " + oldPopulation.Count);
             for (int ii = 0; ii < oldPopulation.Count; ii++)
             {
@@ -34,18 +48,20 @@ namespace RobotSimulationController.GA.Crossover
                 for (int jj = 1; jj < oldPopulation.Count; jj++)
                 {
                     if (newPopulation.Count >= MAX_CHILD_COUNT) break;
-                    Console.WriteLine("mating " + ii + " with " + jj);
-                    AbstractRobot child = (AbstractRobot)oldPopulation[0].Clone();
-                    child.setGenome(makeCrossover(oldPopulation[ii], oldPopulation[jj]));
+                    AbstractRobot child = prototype.Clone();
+                    child.setGenome(MakeCrossover(oldPopulation[ii], oldPopulation[jj]));
+                    Mutation.Mutate(child);
                     newPopulation.Add(child);
                 }
             }
+
+
+            return newPopulation;
         }
 
-        private Genome makeCrossover(AbstractRobot robot1, AbstractRobot robot2)
+        private Genome MakeCrossover(AbstractRobot robot1, AbstractRobot robot2)
         {
-            
-            
+           
             float[] genome1 = robot1.getGenome().getWeights();
             float[] genome2 = robot2.getGenome().getWeights();
 
@@ -57,7 +73,7 @@ namespace RobotSimulationController.GA.Crossover
 
             for (int ii = 0; ii < genome1.Length; ii++)
             {
-                newGenome[ii] = ((rand.NextDouble() > 0.5) ? genome1[ii] : genome2[ii]);
+                newGenome[ii] = ((Random.NextDouble() > 0.5) ? genome1[ii] : genome2[ii]);
             }
             Genome result = new Genome(newGenome);
 
@@ -69,9 +85,15 @@ namespace RobotSimulationController.GA.Crossover
             return result;
         }
 
-        private static List<AbstractRobot> ChooseNewParents(List<AbstractRobot> oldPopulation)
+        private static List<AbstractRobot> ChooseBestIndividual(List<AbstractRobot> oldPopulation)
         {
-            int newParentsCount = (int)(oldPopulation.Count * PERCENT_OF_BEST);
+            
+            int newParentsCount = 2;
+            while (newParentsCount * (newParentsCount - 1) < oldPopulation.Count)
+            {
+                newParentsCount++;
+            }
+
             oldPopulation = oldPopulation.GetRange(0, newParentsCount);
             oldPopulation.ForEach(robot => Console.WriteLine("fitness " + robot.FitnessValue));
 

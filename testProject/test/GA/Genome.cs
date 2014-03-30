@@ -8,7 +8,11 @@ namespace RobotSimulationController.GA
     class Genome
     {
 
-        private List<Allel> Alleles;
+        public List<Allel> Alleles
+        {
+            get;
+            private set;
+        }
 
         public Genome(float[] weights)
         {

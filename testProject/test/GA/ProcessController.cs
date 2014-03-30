@@ -2,6 +2,7 @@
 using RobotSimulationController.GA;
 using RobotSimulationController.GA.Crossover;
 using RobotSimulationController.GA.Fitness;
+using RobotSimulationController.GA.Mutation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,19 +14,20 @@ namespace RobotSimulationController
 
     enum RobotType
     {
-        STUPID,
         SIMPLE_NN
     }
 
     class ProcessController
     {
-        const int POPULATION_SIZE = 10;
+
+        public const int POPULATION_SIZE = 20;
 
         MainForm MainForm;
 
         List<AbstractRobot> Population;
         FitnessFunction FitnessFunction = new FinalPosition();
-        CrossoverMechanism Crossover = new CrossoverMechanism();
+        ICrossoverMechanism Crossover = new UniformWithElite();
+        IMutation Mutation = new SimpleMutation();
 
         EvolutionThread Evolution;
 
@@ -47,10 +49,6 @@ namespace RobotSimulationController
                     }
                     break;
                 default:
-                    for (int ii = 0; ii < POPULATION_SIZE; ii++)
-                    {
-                        Population.Add(new StupidRobot(phx));
-                    }
                     break;
             }
         }
@@ -63,7 +61,8 @@ namespace RobotSimulationController
                 .withConnection(connection)
                 .withPopulation(Population)
                 .withFitnessFunction(FitnessFunction)
-                .withCrossover(Crossover);
+                .withCrossover(Crossover)
+                .withMutation(Mutation);
 
             Evolution.EvolutionStopped += new EvolutionThread.EvolutionStoppedHandler(EvolutionStopped);
             Evolution.GenerationFinished += new EvolutionThread.GenerationEvaluatedHandler(GenerationFinished);

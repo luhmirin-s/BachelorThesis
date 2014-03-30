@@ -50,11 +50,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GA\Allel.cs" />
+    <Compile Include="GA\Crossover\ICrossoverMechanism.cs" />
     <Compile Include="GA\Genome.cs" />
-    <Compile Include="GA\Crossover\CrossoverMechanism.cs" />
+    <Compile Include="GA\Crossover\UniformWithElite.cs" />
     <Compile Include="GA\EvolutionThread.cs" />
     <Compile Include="GA\Fitness\FinalPosition.cs" />
     <Compile Include="GA\Fitness\FitnessFunction.cs" />
+    <Compile Include="GA\Mutation\IMutation.cs" />
+    <Compile Include="GA\Mutation\SimpleMutation.cs" />
     <Compile Include="NN\ActivationFunction.cs" />
     <Compile Include="NN\AbstractNN.cs" />
     <Compile Include="NN\Synapse.cs" />
@@ -62,7 +65,6 @@
     <Compile Include="NN\SimpleNN.cs" />
     <Compile Include="GA\ProcessController.cs" />
     <Compile Include="Robots\SimpleNNRobot.cs" />
-    <Compile Include="Robots\StupidRobot.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="GA\Worker.cs" />
     <Compile Include="Robots\AbstractRobot.cs" />
