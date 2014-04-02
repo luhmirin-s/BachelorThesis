@@ -1,21 +1,21 @@
-﻿using RobotSimulationController.GA.Mutation;
+﻿using RobotSimulationController.GA.Mutations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace RobotSimulationController.GA.Crossover
+namespace RobotSimulationController.GA.Crossovers
 {
-    class UniformWithElite : ICrossoverMechanism
+    class UniformWithElite : Crossover
     {
 
         const int ELITE_SIZE = 2;
         const int MAX_CHILD_COUNT = ProcessController.POPULATION_SIZE;
 
         protected Random Random = new Random();
-        private IMutation Mutation;
+        private Mutation Mutation;
 
-        public List<AbstractRobot> CreateNewPopulation(List<AbstractRobot> oldPopulation, IMutation mutation)
+        public List<AbstractRobot> CreateNewPopulation(List<AbstractRobot> oldPopulation, Mutation mutation)
         {
             Mutation = mutation;
 
@@ -29,7 +29,7 @@ namespace RobotSimulationController.GA.Crossover
             return offsprings;
         }
 
-        private static void addElite(List<AbstractRobot> oldPopulation, List<AbstractRobot> newPopulation)
+        private void addElite(List<AbstractRobot> oldPopulation, List<AbstractRobot> newPopulation)
         {
             newPopulation.AddRange(oldPopulation.GetRange(0, ELITE_SIZE));
         }
@@ -49,7 +49,7 @@ namespace RobotSimulationController.GA.Crossover
                 {
                     if (newPopulation.Count >= MAX_CHILD_COUNT) break;
                     AbstractRobot child = prototype.Clone();
-                    child.setGenome(MakeCrossover(oldPopulation[ii], oldPopulation[jj]));
+                    child.Genotype = MakeCrossover(oldPopulation[ii], oldPopulation[jj]);
                     Mutation.Mutate(child);
                     newPopulation.Add(child);
                 }
@@ -62,12 +62,12 @@ namespace RobotSimulationController.GA.Crossover
         private Genome MakeCrossover(AbstractRobot robot1, AbstractRobot robot2)
         {
            
-            float[] genome1 = robot1.getGenome().getWeights();
-            float[] genome2 = robot2.getGenome().getWeights();
+            float[] genome1 = robot1.Genotype.GetWeights();
+            float[] genome2 = robot2.Genotype.GetWeights();
 
             Console.WriteLine("from");
-            Console.WriteLine(robot1.getGenome().ToString());
-            Console.WriteLine(robot2.getGenome().ToString());
+            Console.WriteLine(robot1.Genotype.ToString());
+            Console.WriteLine(robot2.Genotype.ToString());
 
             float[] newGenome = new float[genome1.Length];
 
@@ -85,7 +85,7 @@ namespace RobotSimulationController.GA.Crossover
             return result;
         }
 
-        private static List<AbstractRobot> ChooseBestIndividual(List<AbstractRobot> oldPopulation)
+        private List<AbstractRobot> ChooseBestIndividual(List<AbstractRobot> oldPopulation)
         {
             
             int newParentsCount = 2;
@@ -100,7 +100,7 @@ namespace RobotSimulationController.GA.Crossover
             return oldPopulation;
         }
 
-        private static void SortPopulation(List<AbstractRobot> oldPopulation)
+        private void SortPopulation(List<AbstractRobot> oldPopulation)
         {
             oldPopulation.Sort(delegate(AbstractRobot x, AbstractRobot y)
             {

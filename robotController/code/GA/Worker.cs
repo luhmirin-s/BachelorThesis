@@ -51,7 +51,7 @@ namespace RobotSimulationController
             _shouldStop = true;
         }
 
-        public float getFitness(FitnessFunction function)
+        public float GetFitness(FitnessFunction function)
         {
             return function.Calculate(Robot, new float[] {});
         }

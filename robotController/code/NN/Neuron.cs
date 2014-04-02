@@ -1,4 +1,6 @@
-﻿using System;
+﻿using RobotSimulationController.NN.Activation;
+using RobotSimulationController.Properties;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -43,7 +45,7 @@ namespace RobotSimulationController.NN
             Inputs = new List<Synapse>();
 
             // Default activation function shall be sigmoid
-            ActivationFunction = new Sigmoid();
+            ActivationFunction = ActivationFunctionFactory.CreateDefaultFunction();
         }
 
         public Neuron(int index) : this(index, 0) {}

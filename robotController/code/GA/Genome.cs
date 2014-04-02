@@ -28,12 +28,12 @@ namespace RobotSimulationController.GA
             Alleles = alleles.ToList();
         }
 
-        public float getWeight(int index)
+        public float GetWeight(int index)
         {
             return Alleles[index].getValue();
         }
 
-        public float[] getWeights()
+        public float[] GetWeights()
         {
             return Alleles.Select(a => a.getValue()).ToArray();
         }
@@ -41,7 +41,7 @@ namespace RobotSimulationController.GA
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            getWeights().ToList().ForEach(f => sb.Append(f).Append(";"));
+            GetWeights().ToList().ForEach(f => sb.Append(f).Append(";"));
             return sb.ToString();
         }
     }

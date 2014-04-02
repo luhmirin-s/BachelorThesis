@@ -1,6 +1,7 @@
 ﻿using Moda;
 using RobotSimulationController.GA;
 using RobotSimulationController.NN;
+using RobotSimulationController.Properties;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,23 +10,34 @@ using System.Windows.Forms;
 
 namespace RobotSimulationController
 {
-    class SimpleNNRobot : AbstractRobot
+    class RobotNN : AbstractRobot
     {
 
-        private SimpleNN Network;
+        private AbstractNN Network;
 
-        public SimpleNNRobot(RobotPHX robot, Genome genome)
+        public override Genome Genotype
+        {
+            get { return base.Genotype; }
+            set
+            {
+                base.Genotype = value;
+                Network = NetworkFactory.CreateDefaultNetwork(Genotype.GetWeights());
+            }
+        }
+
+        public RobotNN(RobotPHX robot, Genome genome)
         {
             Robot = robot;
             Genotype = genome;
-            Network = new SimpleNN(Genotype.getWeights());
+            Network = NetworkFactory.CreateDefaultNetwork(Genotype.GetWeights());
         }
 
-        public SimpleNNRobot(RobotPHX robot)
+        public RobotNN(RobotPHX robot)
         {
             Robot = robot;
-            Genotype = new Genome(SimpleNN.getRandomizedWeights());
-            Network = new SimpleNN(Genotype.getWeights());
+            Network = NetworkFactory.CreateDefaultNetwork(new float[] {});
+            Genotype = new Genome(Network.Weights);
+            
         }
 
         public override void ComputeStep()
@@ -42,7 +54,7 @@ namespace RobotSimulationController
             Robot.GetConnection().Sleep(150);
         }
 
-        public override String GetWeights()
+        public override String GetWeightsAsString()
         {
             float[] weights = Network.Weights;
 
@@ -56,20 +68,5 @@ namespace RobotSimulationController
             return sb.ToString();
         }
 
-        public override Genome getGenome()
-        {
-            return base.getGenome();
-        }
-
-        public override void setGenome(Genome genome)
-        {
-            base.setGenome(genome);
-            Network = new SimpleNN(Genotype.getWeights());
-        }
-
-        public override AbstractRobot Clone()
-        {
-            return new SimpleNNRobot(this.Robot, this.getGenome());
-        }
     }
 }

@@ -10,19 +10,14 @@ namespace RobotSimulationController.NN
 
         protected List<Neuron> Neurons = new List<Neuron>();
 
-        public float[] Weights
-        {
-            get;
-            set;
-        }
+        public float[] Weights { get; set; }
 
-        protected static Random Rand = new Random();
+        public int NeuronCount { get; protected set; }
+        public int LinkCount { get; protected set; }
 
-        public AbstractNN()
-        {
-        }
+        public AbstractNN() {}
         
-        protected abstract void InitNetwork();
+        public abstract void InitNetwork();
 
         protected void CreateSynapse(Neuron from, Neuron to, int indexWeight)
         {

@@ -3,25 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace RobotSimulationController.NN
+namespace RobotSimulationController.NN.Activation
 {
-    interface IActivationFunction
-    {
-        float Compute(float value);
-    }
-
-    class ClassicSigmoid : IActivationFunction
-    {
-
-        public float Compute(float value)
-        {
-            return (float)(1 / (1 + Math.Exp(-value)));
-        }
-    }
-
     class Sigmoid : IActivationFunction
     {
-        // Making classic sigmoid range [-1,1
+        // Making classic sigmoid range [-1,1]
         // Function returns negative results only if value is < ~0.2
         public float Compute(float value)
         {

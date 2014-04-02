@@ -21,7 +21,7 @@ namespace RobotSimulationController
 
         private ProcessController Controller;
 
-        private RobotType typeRobot = RobotType.SIMPLE_NN;
+        private RobotType RobotType = RobotType.SIMPLE_NN;
 
         public MainForm()
         {
@@ -66,17 +66,17 @@ namespace RobotSimulationController
             }
         }
 
-        private void prepareNewController()
+        private void PrepareNewController()
         {
             Controller = new ProcessController(this);
-            Controller.SetRobotType(typeRobot, Phx);
+            Controller.SetRobotType(RobotType, Phx);
         }
 
         //####################################################################
         protected void buttonStart_Click(object sender, EventArgs e)
         {
-            prepareNewController();
-            Controller.start(Connection);
+            PrepareNewController();
+            Controller.Start(Connection);
 
             buttonStart.Enabled = false;
             buttonStop.Enabled = true;
@@ -85,7 +85,7 @@ namespace RobotSimulationController
 
         private void buttonStop_Click(object sender, EventArgs e)
         {
-            Controller.stop();
+            Controller.Stop();
             buttonStop.Enabled = false;
             buttonStop.Text = "Finishing...";
             buttonStart.Enabled = true;
@@ -143,7 +143,7 @@ namespace RobotSimulationController
 
         private void radioSimpleNNRobot_CheckedChanged(object sender, EventArgs e)
         {
-            typeRobot = RobotType.SIMPLE_NN;
+            RobotType = RobotType.SIMPLE_NN;
         }
         
     }

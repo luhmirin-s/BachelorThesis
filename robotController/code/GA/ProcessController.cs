@@ -1,8 +1,8 @@
 ﻿using Moda;
 using RobotSimulationController.GA;
-using RobotSimulationController.GA.Crossover;
+using RobotSimulationController.GA.Crossovers;
 using RobotSimulationController.GA.Fitness;
-using RobotSimulationController.GA.Mutation;
+using RobotSimulationController.GA.Mutations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,9 +25,6 @@ namespace RobotSimulationController
         MainForm MainForm;
 
         List<AbstractRobot> Population;
-        FitnessFunction FitnessFunction = new FinalPosition();
-        ICrossoverMechanism Crossover = new UniformWithElite();
-        IMutation Mutation = new SimpleMutation();
 
         EvolutionThread Evolution;
 
@@ -39,39 +36,37 @@ namespace RobotSimulationController
         public void SetRobotType(RobotType type, RobotPHX phx)
         {
             Population = new List<AbstractRobot>();
-            
+
             switch (type)
             {
                 case RobotType.SIMPLE_NN:
                     for (int ii = 0; ii < POPULATION_SIZE; ii++)
                     {
-                        Population.Add(new SimpleNNRobot(phx));
+                        Population.Add(new RobotNN(phx));
                     }
                     break;
                 default:
                     break;
             }
         }
-                
-        public void start(Connection connection)
+
+        public void Start(Connection connection)
         {
             Console.WriteLine("### started evolution ###");
 
-            Evolution = EvolutionThread.newInstance()
-                .withConnection(connection)
-                .withPopulation(Population)
-                .withFitnessFunction(FitnessFunction)
-                .withCrossover(Crossover)
-                .withMutation(Mutation);
+            Evolution = EvolutionThread.NewInstance()
+                .WithConnection(connection)
+                .WithPopulation(Population);
 
-            Evolution.EvolutionStopped += new EvolutionThread.EvolutionStoppedHandler(EvolutionStopped);
-            Evolution.GenerationFinished += new EvolutionThread.GenerationEvaluatedHandler(GenerationFinished);
+
+            Evolution.EvolutionStoppedEvent += new EvolutionThread.EvolutionStoppedDelegate(EvolutionStopped);
+            Evolution.GenerationFinishedEvent += new EvolutionThread.GenerationEvaluatedDelegate(GenerationFinished);
 
             Thread t = new Thread(Evolution.DoWork);
             t.Start();
         }
 
-        public void stop()
+        public void Stop()
         {
             if (Evolution != null)
             {

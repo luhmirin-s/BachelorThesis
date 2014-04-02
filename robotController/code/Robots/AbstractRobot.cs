@@ -11,22 +11,22 @@ namespace RobotSimulationController
     abstract class AbstractRobot
     {
         // Used to post robots device status
-        public delegate void MotorsCheckedHandler(bool checkResult);
-        public event MotorsCheckedHandler MotorsChecked;
-        public delegate void SensorsCheckedHandler(bool checkResult);
-        public event SensorsCheckedHandler SensorsChecked;
+        public delegate void MotorsCheckedDelegate(bool checkResult);
+        public event MotorsCheckedDelegate MotorsCheckedEvent;
+        public delegate void SensorsCheckedDelegate(bool checkResult);
+        public event SensorsCheckedDelegate SensorsCheckedEvent;
 
         // Used to post current sensor readings
-        public delegate void SensorResultHandler(float ld, float rd);
-        public event SensorResultHandler PostSensorResults;
+        public delegate void SensorResultDelegate(float ld, float rd);
+        public event SensorResultDelegate PostSensorResultsEvent;
 
         // Used to post current robot position
-        public delegate void CurrentPositionHandler(float positionX, float positionZ);
-        public event CurrentPositionHandler PostCurrentPosition;
+        public delegate void CurrentPositionDelegate(float positionX, float positionZ);
+        public event CurrentPositionDelegate PostCurrentPositionEvent;
 
         // Used to post new motor speeds
-        public delegate void MotorSpeedHandler(float lm, float rm);
-        public event MotorSpeedHandler PostMotorSpeed;
+        public delegate void MotorSpeedDelegate(float lm, float rm);
+        public event MotorSpeedDelegate PostMotorSpeedEvent;
 
         // Robot instance
         protected RobotPHX Robot;
@@ -43,13 +43,9 @@ namespace RobotSimulationController
         protected Geom RobotGeometry;
 
         // Some fitness function evaluation result for this robot
-        public float FitnessValue
-        {
-            get;
-            set;
-        }
+        public float FitnessValue { get; set; }
 
-        protected Genome Genotype;
+        public virtual Genome Genotype { get; set; }
 
         protected AbstractRobot()
         {
@@ -69,16 +65,16 @@ namespace RobotSimulationController
         {
             LeftMotor = Robot.QueryDeviceMotor(Constants.LEFT_MOTOR);
             RightMotor = Robot.QueryDeviceMotor(Constants.RIGHT_MOTOR);
-            if (MotorsChecked != null)
+            if (MotorsCheckedEvent != null)
             {
-                MotorsChecked(LeftMotor != null && RightMotor != null);
+                MotorsCheckedEvent(LeftMotor != null && RightMotor != null);
             }
 
             LeftSensor = Robot.QueryDeviceDistance(Constants.RIGHT_SENSOR);
             RightSensor = Robot.QueryDeviceDistance(Constants.LEFT_SENSOR);
-            if (SensorsChecked != null)
+            if (SensorsCheckedEvent != null)
             {
-                SensorsChecked(LeftSensor != null && RightSensor != null);
+                SensorsCheckedEvent(LeftSensor != null && RightSensor != null);
             }
 
             RobotGeometry = Robot.QueryGeom(Constants.BASE);
@@ -89,7 +85,7 @@ namespace RobotSimulationController
          */
         public bool IsValid()
         {
-            return LeftMotor != null && RightMotor != null && LeftSensor != null && RightSensor != null;
+            return LeftMotor != null && RightMotor != null && LeftSensor != null && RightSensor != null && RobotGeometry != null;
         }
 
         /*
@@ -119,9 +115,9 @@ namespace RobotSimulationController
         protected void PostPosition()
         {
             Vector3 position = RobotGeometry.GetPosition();
-            if (PostCurrentPosition != null)
+            if (PostCurrentPositionEvent != null)
             {
-                PostCurrentPosition(position.X, position.Z);
+                PostCurrentPositionEvent(position.X, position.Z);
             }
         }
 
@@ -130,9 +126,9 @@ namespace RobotSimulationController
          */
         protected void PostSensorReadings(float ld, float rd)
         {
-            if (PostSensorResults != null)
+            if (PostSensorResultsEvent != null)
             {
-                PostSensorResults(ld, rd);
+                PostSensorResultsEvent(ld, rd);
             }
         }
 
@@ -142,13 +138,13 @@ namespace RobotSimulationController
          */
         protected void SetNewMotorSpeeds(float[] speeds)
         {
-            const float MAX_SPEED = 720f; // 2 rotations per second
+            const float MAX_SPEED = 360f; // 2 rotations per second
             float lm = speeds[0] * MAX_SPEED;
             float rm = speeds[1] * MAX_SPEED;
 
-            if (PostMotorSpeed != null)
+            if (PostMotorSpeedEvent != null)
             {
-                PostMotorSpeed(lm, rm);
+                PostMotorSpeedEvent(lm, rm);
             }
             LeftMotor.SetVelocityDPS(lm);
             RightMotor.SetVelocityDPS(rm);
@@ -181,24 +177,14 @@ namespace RobotSimulationController
             return new float[] { ld, rd };
         }
 
-        public virtual String GetWeights()
+        public virtual String GetWeightsAsString()
         {
             return "N/A";
         }
 
-        public Vector3 getPosition()
+        public Vector3 GetPosition()
         {
             return RobotGeometry.GetPosition();
-        }
-
-        public virtual Genome getGenome()
-        {
-            return Genotype;
-        }
-
-        public virtual void setGenome(Genome genome)
-        {
-            Genotype = genome;
         }
 
         public abstract AbstractRobot Clone();

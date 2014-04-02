@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace RobotSimulationController.GA.Mutation
+namespace RobotSimulationController.GA.Mutations
 {
-    class SimpleMutation : IMutation
+    class RandomBitFlip : Mutation
     {
 
         public const int MAX_MUTATED_GENES = 5;
@@ -16,7 +16,7 @@ namespace RobotSimulationController.GA.Mutation
         public void Mutate(AbstractRobot robot)
         {
 
-            Genome genes = robot.getGenome();
+            Genome genes = robot.Genotype;
 
             PerformBitFlip(genes);
 

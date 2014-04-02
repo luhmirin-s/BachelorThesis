@@ -10,7 +10,7 @@ namespace RobotSimulationController.GA.Fitness
 
         public float Calculate(AbstractRobot robot, float[] data)
         {
-            return robot.getPosition().X;
+            return robot.GetPosition().X;
         }
     }
 }

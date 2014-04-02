@@ -1,7 +1,7 @@
 ﻿using RobotSimulationController.DB;
-using RobotSimulationController.GA.Crossover;
+using RobotSimulationController.GA.Crossovers;
 using RobotSimulationController.GA.Fitness;
-using RobotSimulationController.GA.Mutation;
+using RobotSimulationController.GA.Mutations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,65 +16,51 @@ namespace RobotSimulationController.GA
         public const int MAX_GENERATIONS = 100;
         public const int GENERATION_LIFE_TIME = 1000; //ms
 
-        public delegate void EvolutionStoppedHandler();
-        public event EvolutionStoppedHandler EvolutionStopped;
+        public delegate void EvolutionStoppedDelegate();
+        public event EvolutionStoppedDelegate EvolutionStoppedEvent;
 
-        public delegate void GenerationEvaluatedHandler(String text);
-        public event GenerationEvaluatedHandler GenerationFinished;
+        public delegate void GenerationEvaluatedDelegate(String text);
+        public event GenerationEvaluatedDelegate GenerationFinishedEvent;
 
 
         Moda.Connection Connection;
         List<AbstractRobot> Population;
         FitnessFunction Fitness;
-        ICrossoverMechanism Crossover;
-        IMutation Mutation;
+        Crossover Crossover;
+        Mutation Mutation;
 
-        int generationCounter = 0;
+        int GenerationCounter = 0;
         DateTime Timestamp;
 
         private bool _shouldStop;
 
         Worker IndividThread;
 
-        public static EvolutionThread newInstance()
+        public static EvolutionThread NewInstance()
         {
             return new EvolutionThread();
         }
 
         private EvolutionThread()
         {
-            generationCounter = 0;
+            GenerationCounter = 0;
             Timestamp = System.DateTime.Now;
+            Fitness = FitnessFunctionFactory.CreateDefaultFunction();
+            Crossover = CrossoverFactory.CreateDefaultCrossover();
+            Mutation = MutationFactory.CreateDefaultMutation();
+
         }
 
         // Parametr setters. ALL MANDATORY 
-        public EvolutionThread withPopulation(List<AbstractRobot> population)
+        public EvolutionThread WithPopulation(List<AbstractRobot> population)
         {
             Population = population;
             return this;
         }
 
-        public EvolutionThread withConnection(Moda.Connection connection)
+        public EvolutionThread WithConnection(Moda.Connection connection)
         {
             Connection = connection;
-            return this;
-        }
-
-        public EvolutionThread withFitnessFunction(FitnessFunction function)
-        {
-            Fitness = function;
-            return this;
-        }
-
-        public EvolutionThread withCrossover(ICrossoverMechanism crossover)
-        {
-            Crossover = crossover;
-            return this;
-        }
-
-        public EvolutionThread withMutation(IMutation mutation)
-        {
-            Mutation = mutation;
             return this;
         }
 
@@ -85,8 +71,8 @@ namespace RobotSimulationController.GA
             ExperimentContext db = new ExperimentContext();
             while (!_shouldStop)
             {
-                generationCounter++;
-                Population.ForEach( robot =>
+                GenerationCounter++;
+                Population.ForEach(robot =>
                 {
                     // Execute individual
                     IndividThread = new Worker(robot, Connection);
@@ -95,7 +81,7 @@ namespace RobotSimulationController.GA
                     Thread.Sleep(GENERATION_LIFE_TIME);
                     IndividThread.RequestStop();
                     // Evaluate individual
-                    robot.FitnessValue = IndividThread.getFitness(Fitness);
+                    robot.FitnessValue = IndividThread.GetFitness(Fitness);
 
 
                     //IndividModel model = new IndividModel();
@@ -113,37 +99,37 @@ namespace RobotSimulationController.GA
                 float max = Population.Max(robot => robot.FitnessValue);
                 float min = Population.Min(robot => robot.FitnessValue);
                 postGenerationResults(avg, max, min);
-                
-                if (_shouldStop || generationCounter >= MAX_GENERATIONS) break;
+
+                if (_shouldStop || GenerationCounter >= MAX_GENERATIONS) break;
                 // creating new population
                 Population = Crossover.CreateNewPopulation(Population, Mutation);
 
             }
 
             //var query = from b in db.Individuals
-           //                            orderby b.Generation
+            //                            orderby b.Generation
             //                           select b;
-          //  Console.WriteLine("All items in the database:");
+            //  Console.WriteLine("All items in the database:");
             //foreach (var item in query)
             //{
             //    Console.WriteLine(item.Generation + " generation " + item.Fitness + " fitness");
-              //  Console.WriteLine("weights "  + item.Weights.ToString());
-              //  Console.WriteLine("timestamp " + item.ExperimentTimestamp.ToLongTimeString());
+            //  Console.WriteLine("weights "  + item.Weights.ToString());
+            //  Console.WriteLine("timestamp " + item.ExperimentTimestamp.ToLongTimeString());
             //}
 
 
-            if (EvolutionStopped != null)
+            if (EvolutionStoppedEvent != null)
             {
-                EvolutionStopped();
+                EvolutionStoppedEvent();
             }
         }
 
         private void postGenerationResults(float avg, float max, float min)
         {
-            String s = generationCounter + ") avg=" + avg + " max=" + max + " min=" + min;
-            if (GenerationFinished != null)
+            String s = GenerationCounter + ") avg=" + avg + " max=" + max + " min=" + min;
+            if (GenerationFinishedEvent != null)
             {
-                GenerationFinished(s);
+                GenerationFinishedEvent(s);
             }
         }
 

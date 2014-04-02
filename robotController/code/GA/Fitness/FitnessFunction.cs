@@ -5,10 +5,10 @@ using System.Text;
 
 namespace RobotSimulationController.GA.Fitness
 {
-    interface FitnessFunction
+    abstract class FitnessFunction
     {
 
-        float Calculate(AbstractRobot robot, float[] data);
+        public abstract float Calculate(AbstractRobot robot, float[] data);
 
     }
 }
