@@ -13,7 +13,7 @@ namespace RobotSimulationController.GA.Mutations
 
         private Random Random = new Random();
 
-        public void Mutate(AbstractRobot robot)
+        public override void Mutate(AbstractRobot robot)
         {
 
             Genome genes = robot.Genotype;

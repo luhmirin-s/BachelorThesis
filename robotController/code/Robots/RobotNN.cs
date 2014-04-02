@@ -68,5 +68,10 @@ namespace RobotSimulationController
             return sb.ToString();
         }
 
+        public override AbstractRobot Clone()
+        {
+            return new RobotNN(Robot, Genotype);
+        }
+
     }
 }

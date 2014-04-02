@@ -15,7 +15,7 @@ namespace RobotSimulationController.GA.Crossovers
         protected Random Random = new Random();
         private Mutation Mutation;
 
-        public List<AbstractRobot> CreateNewPopulation(List<AbstractRobot> oldPopulation, Mutation mutation)
+        public override List<AbstractRobot> CreateNewPopulation(List<AbstractRobot> oldPopulation, Mutation mutation)
         {
             Mutation = mutation;
 

@@ -8,7 +8,7 @@ namespace RobotSimulationController.GA.Fitness
     class FinalPosition : FitnessFunction
     {
 
-        public float Calculate(AbstractRobot robot, float[] data)
+        public override float Calculate(AbstractRobot robot, float[] data)
         {
             return robot.GetPosition().X;
         }
