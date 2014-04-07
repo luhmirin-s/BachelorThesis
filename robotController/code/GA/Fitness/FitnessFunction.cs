@@ -8,7 +8,7 @@ namespace RobotSimulationController.GA.Fitness
     abstract class FitnessFunction
     {
 
-        public abstract float Calculate(AbstractRobot robot, float[] data);
+        public abstract float Calculate(EvaluationStatistics statistics);
 
     }
 }

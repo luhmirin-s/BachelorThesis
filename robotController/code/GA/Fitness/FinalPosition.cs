@@ -5,12 +5,12 @@ using System.Text;
 
 namespace RobotSimulationController.GA.Fitness
 {
-    class FinalPosition : FitnessFunction
+    class MaxPosition : FitnessFunction
     {
 
-        public override float Calculate(AbstractRobot robot, float[] data)
+        public override float Calculate(EvaluationStatistics statistics)
         {
-            return robot.GetPosition().X;
+            return statistics.Position.Max();
         }
     }
 }

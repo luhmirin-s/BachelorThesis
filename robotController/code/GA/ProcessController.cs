@@ -3,6 +3,7 @@ using RobotSimulationController.GA;
 using RobotSimulationController.GA.Crossovers;
 using RobotSimulationController.GA.Fitness;
 using RobotSimulationController.GA.Mutations;
+using RobotSimulationController.Properties;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,17 +16,14 @@ namespace RobotSimulationController
     class ProcessController
     {
 
-        public const int POPULATION_SIZE = 20;
-
-        private MainForm MainForm;
+        private int POPULATION_SIZE = Settings.Default.PopulationSize;
 
         private List<AbstractRobot> Population;
 
         private EvolutionThread Evolution;
 
-        public ProcessController(MainForm form)
+        public ProcessController()
         {
-            MainForm = form;
         }
 
         public void SetRobotType(RobotType type, RobotPHX phx)
@@ -53,10 +51,6 @@ namespace RobotSimulationController
                 .WithConnection(connection)
                 .WithPopulation(Population);
 
-
-            Evolution.EvolutionStoppedEvent += new EvolutionThread.EvolutionStoppedDelegate(EvolutionStopped);
-            Evolution.GenerationFinishedEvent += new EvolutionThread.GenerationEvaluatedDelegate(GenerationFinished);
-
             Thread t = new Thread(Evolution.DoWork);
             t.Start();
         }
@@ -69,15 +63,5 @@ namespace RobotSimulationController
             }
         }
 
-        // Form interactions
-        private void EvolutionStopped()
-        {
-            MainForm.EvolutionStop();
-        }
-
-        private void GenerationFinished(String s)
-        {
-            MainForm.AddGenerationInfo(s);
-        }
     }
 }

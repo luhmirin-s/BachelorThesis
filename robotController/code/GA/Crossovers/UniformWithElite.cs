@@ -1,4 +1,5 @@
 ﻿using RobotSimulationController.GA.Mutations;
+using RobotSimulationController.Properties;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,12 +9,6 @@ namespace RobotSimulationController.GA.Crossovers
 {
     class UniformWithElite : Crossover
     {
-
-        public const int ELITE_SIZE = 2;
-        public const int MAX_CHILD_COUNT = ProcessController.POPULATION_SIZE;
-
-        protected Random Random = new Random();
-        private Mutation Mutation;
 
         public override List<AbstractRobot> CreateNewPopulation(List<AbstractRobot> oldPopulation, Mutation mutation)
         {
@@ -40,7 +35,6 @@ namespace RobotSimulationController.GA.Crossovers
 
             AbstractRobot prototype = oldPopulation[0];
 
-            Console.WriteLine("Starting crossover " + oldPopulation.Count);
             for (int ii = 0; ii < oldPopulation.Count; ii++)
             {
                 if (newPopulation.Count >= MAX_CHILD_COUNT) break;
@@ -65,10 +59,6 @@ namespace RobotSimulationController.GA.Crossovers
             float[] genome1 = robot1.Genotype.GetWeights();
             float[] genome2 = robot2.Genotype.GetWeights();
 
-            Console.WriteLine("from");
-            Console.WriteLine(robot1.Genotype.ToString());
-            Console.WriteLine(robot2.Genotype.ToString());
-
             float[] newGenome = new float[genome1.Length];
 
             for (int ii = 0; ii < genome1.Length; ii++)
@@ -76,11 +66,6 @@ namespace RobotSimulationController.GA.Crossovers
                 newGenome[ii] = ((Random.NextDouble() > 0.5) ? genome1[ii] : genome2[ii]);
             }
             Genome result = new Genome(newGenome);
-
-            Console.WriteLine("New genome created");
-            Console.WriteLine(result.ToString());
-            
-            Console.WriteLine("##################");
 
             return result;
         }
@@ -95,7 +80,6 @@ namespace RobotSimulationController.GA.Crossovers
             }
 
             oldPopulation = oldPopulation.GetRange(0, newParentsCount);
-            oldPopulation.ForEach(robot => Console.WriteLine("fitness " + robot.FitnessValue));
 
             return oldPopulation;
         }

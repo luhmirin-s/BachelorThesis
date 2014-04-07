@@ -78,6 +78,7 @@
     <Compile Include="GA\Crossovers\Crossover.cs" />
     <Compile Include="GA\Crossovers\CrossoverFactory.cs" />
     <Compile Include="GA\Fitness\FitnessFunctionFactory.cs" />
+    <Compile Include="GA\Fitness\EvaluationStatistics.cs" />
     <Compile Include="GA\Genome.cs" />
     <Compile Include="GA\Crossovers\UniformWithElite.cs" />
     <Compile Include="GA\EvolutionThread.cs" />
@@ -86,6 +87,7 @@
     <Compile Include="GA\Mutations\Mutation.cs" />
     <Compile Include="GA\Mutations\MutationFactory.cs" />
     <Compile Include="GA\Mutations\RandomSwap.cs" />
+    <Compile Include="GA\Population.cs" />
     <Compile Include="NN\ActivationFunction\IActivationFunction.cs" />
     <Compile Include="NN\AbstractNN.cs" />
     <Compile Include="NN\ActivationFunction\ActivationFunctionFactory.cs" />

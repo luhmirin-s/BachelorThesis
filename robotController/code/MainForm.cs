@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Threading;
 using Moda;
+using RobotSimulationController.GA;
 
 namespace RobotSimulationController
 {
@@ -59,6 +60,10 @@ namespace RobotSimulationController
                         buttonStart.Enabled = true;
                     }
                 }
+                else
+                {
+                    MessageBox.Show("Unable to connected to MODA server " + textBoxMODAServer.Text);
+                }
             }
             else
             {
@@ -68,7 +73,7 @@ namespace RobotSimulationController
 
         private void PrepareNewController()
         {
-            Controller = new ProcessController(this);
+            Controller = new ProcessController();
             Controller.SetRobotType(RobotType, Phx);
         }
 
@@ -81,6 +86,7 @@ namespace RobotSimulationController
             buttonStart.Enabled = false;
             buttonStop.Enabled = true;
             groupRobots.Enabled = false;
+
         }
 
         private void buttonStop_Click(object sender, EventArgs e)
@@ -93,16 +99,6 @@ namespace RobotSimulationController
         }
 
         //##############################################################################
-
-        public void EvolutionStop()
-        {
-            SetButtonTextSafely(buttonStop, "Stop");
-        }
-
-        public void AddGenerationInfo(string s)
-        {
-            AppendTextBox(s + "\r\n");
-        }
 
         private void SetTextSafely(Label label, string text)
         {

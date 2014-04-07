@@ -15,6 +15,8 @@ namespace RobotSimulationController
             private set;
         }
 
+        private EvaluationStatistics Statistics;
+
         private Connection Connection;
 
         private volatile bool _shouldStop;
@@ -23,6 +25,7 @@ namespace RobotSimulationController
         {
             Robot = robot;
             Connection = connection;
+            Statistics = new EvaluationStatistics();
         }
 
         public void DoWork()
@@ -31,16 +34,24 @@ namespace RobotSimulationController
             if (Robot.IsValid())
             {
                 Robot.PositionRobotAtStart();
+                Robot.PostMotorSpeedEvent +=
+                    new AbstractRobot.MotorSpeedDelegate(MotorSpeedsObtained);
+                Robot.PostSensorResultsEvent +=
+                    new AbstractRobot.SensorResultDelegate(SensorResultsObtained);
+                Robot.PostCurrentPositionEvent +=
+                    new AbstractRobot.CurrentPositionDelegate(CurrentPositionObtained);
             }
             else
             {
                 throw new Exception();
             }
-            
+
             while (!_shouldStop)
             {
                 Robot.ComputeStep();
                 Connection.Sleep(100);
+
+
             }
             Robot.Stop();
 
@@ -55,7 +66,22 @@ namespace RobotSimulationController
 
         public float GetFitness(FitnessFunction function)
         {
-            return function.Calculate(Robot, new float[] {});
+            return function.Calculate(Statistics);
+        }
+
+        private void MotorSpeedsObtained(float lm, float rm)
+        {
+            Statistics.AddMotorSpeed(lm, rm);
+        }
+
+        private void CurrentPositionObtained(float positionX, float positionZ)
+        {
+            Statistics.AddPosition(positionX);
+        }
+
+        private void SensorResultsObtained(float ld, float rd)
+        {
+            Statistics.AddSensorReadings(ld, rd);
         }
 
     }
