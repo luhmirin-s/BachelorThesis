@@ -2,37 +2,37 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="RobotSimulationController.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="UsedNN" Type="System.Int32" Scope="Application">
+    <Setting Name="UsedNN" GenerateDefaultValueInCode="false" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="UsedActivationFunction" Type="System.Int32" Scope="Application">
+    <Setting Name="UsedActivationFunction" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">1</Value>
     </Setting>
-    <Setting Name="UsedFitnessFunction" Type="System.Int32" Scope="Application">
+    <Setting Name="UsedFitnessFunction" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="UsedMutation" Type="System.Int32" Scope="Application">
+    <Setting Name="UsedMutation" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="UsedCrossover" Type="System.Int32" Scope="Application">
+    <Setting Name="UsedCrossover" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="GenerationCount" Type="System.Int32" Scope="Application">
+    <Setting Name="GenerationCount" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">100</Value>
     </Setting>
-    <Setting Name="GenerationLifeTime" Type="System.Int32" Scope="Application">
+    <Setting Name="GenerationLifeTime" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">1000</Value>
     </Setting>
-    <Setting Name="PopulationSize" Type="System.Int32" Scope="Application">
+    <Setting Name="PopulationSize" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">20</Value>
     </Setting>
-    <Setting Name="MutationProbability" Type="System.Double" Scope="Application">
+    <Setting Name="MutationProbability" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0.1</Value>
     </Setting>
-    <Setting Name="MaxMutatedGenes" Type="System.Int32" Scope="Application">
+    <Setting Name="MaxMutatedGenes" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">5</Value>
     </Setting>
-    <Setting Name="EliteSize" Type="System.Int32" Scope="Application">
+    <Setting Name="EliteSize" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">3</Value>
     </Setting>
   </Settings>

@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.Threading;
 using Moda;
 using RobotSimulationController.GA;
+using RobotSimulationController.Properties;
 
 namespace RobotSimulationController
 {
@@ -56,8 +57,8 @@ namespace RobotSimulationController
                     {
                         buttonConnect.Enabled = false;
                         buttonConnect.Text = "Connected";
-                        groupRobots.Enabled = true;
                         buttonStart.Enabled = true;
+                        
                     }
                 }
                 else
@@ -80,12 +81,26 @@ namespace RobotSimulationController
         //####################################################################
         protected void buttonStart_Click(object sender, EventArgs e)
         {
+            Settings.Default.UsedNN = comboRobot.SelectedIndex;
+            Settings.Default.UsedActivationFunction = comboActivation.SelectedIndex;
+            Settings.Default.UsedFitnessFunction = comboFitness.SelectedIndex;
+            Settings.Default.UsedMutation = comboMutation.SelectedIndex;
+            Settings.Default.UsedCrossover = comboCrossover.SelectedIndex;
+
+            Settings.Default.GenerationCount = int.Parse(textGenerationCount.Text);
+            Settings.Default.GenerationLifeTime = int.Parse(textLifeTime.Text);
+            Settings.Default.PopulationSize = int.Parse(textPopulationSize.Text);
+            Settings.Default.MutationProbability = double.Parse(textMutationProbability.Text);
+            Settings.Default.EliteSize = int.Parse(textEliteSize.Text);
+
+            groupParameters.Enabled = false;
+            groupTypes.Enabled = false;
+
             PrepareNewController();
             Controller.Start(Connection);
 
             buttonStart.Enabled = false;
             buttonStop.Enabled = true;
-            groupRobots.Enabled = false;
 
         }
 
@@ -95,7 +110,9 @@ namespace RobotSimulationController
             buttonStop.Enabled = false;
             buttonStop.Text = "Finishing...";
             buttonStart.Enabled = true;
-            groupRobots.Enabled = true;
+
+            groupParameters.Enabled = true;
+            groupTypes.Enabled = true;
         }
 
         //##############################################################################
@@ -113,16 +130,6 @@ namespace RobotSimulationController
             }
         }
 
-        public void AppendTextBox(string value)
-        {
-            if (InvokeRequired)
-            {
-                this.Invoke(new Action<string>(AppendTextBox), new object[] { value });
-                return;
-            }
-            textWeights.Text += value;
-        }
-
         private void SetButtonTextSafely(Button button, string text)
         {
             if (button.InvokeRequired)
@@ -135,13 +142,9 @@ namespace RobotSimulationController
                 button.Text = text;
             }
         }
+
         //#############################################################################
 
-        private void radioSimpleNNRobot_CheckedChanged(object sender, EventArgs e)
-        {
-            RobotType = RobotType.SIMPLE_NN;
-        }
-        
     }
 
 }
