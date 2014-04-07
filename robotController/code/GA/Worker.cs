@@ -1,4 +1,5 @@
-﻿using RobotSimulationController.GA.Fitness;
+﻿using Moda;
+using RobotSimulationController.GA.Fitness;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,8 @@ namespace RobotSimulationController
             get;
             private set;
         }
-        Moda.Connection Connection;
+
+        private Connection Connection;
 
         private volatile bool _shouldStop;
 

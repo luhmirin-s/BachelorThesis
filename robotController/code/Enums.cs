@@ -6,6 +6,11 @@ using System.Text;
 namespace RobotSimulationController
 {
 
+    enum RobotType
+    {
+        SIMPLE_NN
+    }
+
     enum NetworkType
     {
         OneLayer = 0

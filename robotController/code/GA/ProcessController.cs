@@ -12,21 +12,16 @@ using System.Threading;
 namespace RobotSimulationController
 {
 
-    enum RobotType
-    {
-        SIMPLE_NN
-    }
-
     class ProcessController
     {
 
         public const int POPULATION_SIZE = 20;
 
-        MainForm MainForm;
+        private MainForm MainForm;
 
-        List<AbstractRobot> Population;
+        private List<AbstractRobot> Population;
 
-        EvolutionThread Evolution;
+        private EvolutionThread Evolution;
 
         public ProcessController(MainForm form)
         {

@@ -7,7 +7,7 @@ namespace RobotSimulationController.GA
 {
     class Allel
     {
-        const int MAX = 0xFFFF;
+        public const int MAX = 0xFFFF;
 
         public byte[] Genes
         {

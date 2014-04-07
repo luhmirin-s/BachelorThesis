@@ -1,4 +1,5 @@
-﻿using RobotSimulationController.DB;
+﻿using Moda;
+using RobotSimulationController.DB;
 using RobotSimulationController.GA.Crossovers;
 using RobotSimulationController.GA.Fitness;
 using RobotSimulationController.GA.Mutations;
@@ -23,18 +24,18 @@ namespace RobotSimulationController.GA
         public event GenerationEvaluatedDelegate GenerationFinishedEvent;
 
 
-        Moda.Connection Connection;
-        List<AbstractRobot> Population;
-        FitnessFunction Fitness;
-        Crossover Crossover;
-        Mutation Mutation;
+        private Connection Connection;
+        private List<AbstractRobot> Population;
+        private FitnessFunction Fitness;
+        private Crossover Crossover;
+        private Mutation Mutation;
 
-        int GenerationCounter = 0;
-        DateTime Timestamp;
+        private int GenerationCounter = 0;
+        private DateTime Timestamp;
 
         private bool _shouldStop;
 
-        Worker IndividThread;
+        private Worker IndividThread;
 
         public static EvolutionThread NewInstance()
         {

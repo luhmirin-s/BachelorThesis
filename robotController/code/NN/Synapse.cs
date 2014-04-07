@@ -15,7 +15,7 @@ namespace RobotSimulationController.NN
         }
 
 
-        internal Neuron From
+        public Neuron From
         {
             get;
             set;

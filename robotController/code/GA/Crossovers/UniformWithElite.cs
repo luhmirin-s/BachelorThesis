@@ -9,8 +9,8 @@ namespace RobotSimulationController.GA.Crossovers
     class UniformWithElite : Crossover
     {
 
-        const int ELITE_SIZE = 2;
-        const int MAX_CHILD_COUNT = ProcessController.POPULATION_SIZE;
+        public const int ELITE_SIZE = 2;
+        public const int MAX_CHILD_COUNT = ProcessController.POPULATION_SIZE;
 
         protected Random Random = new Random();
         private Mutation Mutation;
