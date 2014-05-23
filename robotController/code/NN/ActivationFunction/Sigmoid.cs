@@ -5,13 +5,11 @@ using System.Text;
 
 namespace RobotSimulationController.NN.Activation
 {
-    class Sigmoid : IActivationFunction
+    class Sigmoid : ActivationFunction
     {
-        // Making classic sigmoid range [-1,1]
-        // Function returns negative results only if value is < ~0.2
-        public float Compute(float value)
+        public override float Compute(float value)
         {
-            return (float)((2 / (1 + 2 * Math.Exp(-5 * value))) - 1);
+            return (float)(1 / (1 + 3 * Math.Exp(-3 * value)));
         }
     }
 }

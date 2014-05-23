@@ -37,7 +37,7 @@ namespace RobotSimulationController.NN
             return new float[] { Neurons[Neurons.Count - 2].Value, Neurons[Neurons.Count - 1].Value };
         }
 
-        public void SetActivationFunction(IActivationFunction function)
+        public void SetActivationFunction(ActivationFunction function)
         {
             Neurons.ForEach(neuron => neuron.ActivationFunction = function);
         }

@@ -13,7 +13,11 @@ namespace RobotSimulationController
 
     enum NetworkType
     {
-        OneLayer = 0
+        OneLayerPerceptron = 0,
+        TwoLayerPerceptron = 1,
+        ThreeLayerPerceptron = 2,
+        ElmanNetwork = 3,
+        HopfieldNetwork = 4        
     }
 
     enum ActivationFuctionType

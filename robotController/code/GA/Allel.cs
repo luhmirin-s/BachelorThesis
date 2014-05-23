@@ -7,7 +7,10 @@ namespace RobotSimulationController.GA
 {
     class Allel
     {
-        public const int MAX = 0xFFFF;
+        // Actual float values can be from -1 to 1 so we add 1 on creation
+        // and subract one on return, so that saved value is always poisitive.
+        // Because of that we use half of 0xFFFF as maximal value.
+        public const int MAX = 0x7FFF;
 
         public byte[] Genes
         {
@@ -18,7 +21,7 @@ namespace RobotSimulationController.GA
         public Allel(float value)
         {
             Genes = new byte[2];
-            int tmp = (int)(MAX * value);
+            int tmp = (int)(MAX * (value + 1));
             // high byte
             Genes[0] = (byte)(tmp >> 8) ;
             //low byte
@@ -28,7 +31,7 @@ namespace RobotSimulationController.GA
         public float getValue()
         {
             int tmp = (Genes[1] | ((int)Genes[0] << 8));
-            return (float)tmp / MAX;
+            return ((float)tmp / MAX - 1);
         }
 
         public void FlipBit(bool inLowerByte, int index)

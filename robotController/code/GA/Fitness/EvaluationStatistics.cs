@@ -70,10 +70,14 @@ namespace RobotSimulationController.GA.Fitness
             return MotorRightValues.Average();
         }
 
-        public float getAverageMotorSpeedOnStep(int i)
+        public float GetAverageMotorSpeedOnStep(int i)
         {
             return (MotorLeftValues[i] + MotorRightValues[i]) / 2;
         }
 
+        public int Size()
+        {
+            return Position.Count;
+        }
     }
 }

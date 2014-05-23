@@ -1,0 +1,278 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="RobotSimulationController.Constants" Collapsed="true">
+    <Position X="14.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAkACAAAAAAAEAAAAAEAEAAQAAAAAAAA=</HashCode>
+      <FileName>Constants.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RobotSimulationController.ProcessController" Collapsed="true">
+    <Position X="10.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAIAAAAAAAAAAAAAAAAIAAEAAAAgAg=</HashCode>
+      <FileName>GA\ProcessController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RobotSimulationController.Worker" Collapsed="true">
+    <Position X="12.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAQEEgEEAAgAAAAABAAAAAAAAAAIAAEAAAA=</HashCode>
+      <FileName>GA\Worker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RobotSimulationController.MainForm" Collapsed="true">
+    <Position X="10.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEBAEACBCWIEARGACEiJAIACSAEACbCAABBAAAAgAUA=</HashCode>
+      <FileName>MainForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RobotSimulationController.Program" Collapsed="true">
+    <Position X="12.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RobotSimulationController.AbstractRobot" Collapsed="true">
+    <Position X="6.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAACAIAgAAAFgAEIQgBABEAACAIAYAlAQQABA=</HashCode>
+      <FileName>Robots\AbstractRobot.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RobotSimulationController.RobotNN" Collapsed="true">
+    <Position X="6.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAEAAAAAAAAAEAAAAAAAAAAQAABA=</HashCode>
+      <FileName>Robots\RobotNN.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RobotSimulationController.DB.ExperimentContext" Collapsed="true">
+    <Position X="12.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DB\ExperimentContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RobotSimulationController.DB.IndividModel" Collapsed="true">
+    <Position X="9" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAIAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAgBA=</HashCode>
+      <FileName>DB\IndividModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RobotSimulationController.GA.Allel" Collapsed="true">
+    <Position X="10.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAAECAAAAAAAAAAAAAEAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>GA\Allel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RobotSimulationController.GA.EvolutionThread" Collapsed="true">
+    <Position X="10.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEgAAgAAAQEAgEIAgACAAAAAAgAAAAgAgACAAAAAgM=</HashCode>
+      <FileName>GA\EvolutionThread.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RobotSimulationController.GA.Genome" Collapsed="true">
+    <Position X="16" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAAAEAAAAQAAAAAAAAAAAAAgAAAAAAAA=</HashCode>
+      <FileName>GA\Genome.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RobotSimulationController.GA.Population" Collapsed="true">
+    <Position X="9" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAAAAAIAAIAAAAAAAAAAAAAAAAAAACABA=</HashCode>
+      <FileName>GA\Population.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RobotSimulationController.GA.Crossovers.Crossover" Collapsed="true">
+    <Position X="3.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAAAAAAAAACAAAAAABAQAAAAAAAAAAAE=</HashCode>
+      <FileName>GA\Crossovers\Crossover.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RobotSimulationController.GA.Crossovers.CrossoverFactory" Collapsed="true">
+    <Position X="16" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAA=</HashCode>
+      <FileName>GA\Crossovers\CrossoverFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RobotSimulationController.GA.Crossovers.UniformWithElite" Collapsed="true">
+    <Position X="3.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIQAAAAAAAACAAAAAAAgQAAAAAAAIAAAA=</HashCode>
+      <FileName>GA\Crossovers\UniformWithElite.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RobotSimulationController.GA.Fitness.EvaluationStatistics" Collapsed="true">
+    <Position X="9" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAIggAAAAAgAAAAAgAAAAIAAAYAAQFA=</HashCode>
+      <FileName>GA\Fitness\EvaluationStatistics.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RobotSimulationController.GA.Fitness.MaxPosition" Collapsed="true">
+    <Position X="0.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GA\Fitness\FinalPosition.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RobotSimulationController.GA.Fitness.FitnessFunction" Collapsed="true">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GA\Fitness\FitnessFunction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RobotSimulationController.GA.Fitness.FitnessFunctionFactory" Collapsed="true">
+    <Position X="14.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAEAAAAAAAAAIAAAAAAAAAAAAA=</HashCode>
+      <FileName>GA\Fitness\FitnessFunctionFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RobotSimulationController.GA.Mutations.Mutation" Collapsed="true">
+    <Position X="3.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAQAAAAAAAAAAABAAACAAAAAAAAAA=</HashCode>
+      <FileName>GA\Mutations\Mutation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RobotSimulationController.GA.Mutations.MutationFactory" Collapsed="true">
+    <Position X="12.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>GA\Mutations\MutationFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RobotSimulationController.GA.Mutations.RandomBitFlip" Collapsed="true">
+    <Position X="3.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAABAAACAAAAAAAAAA=</HashCode>
+      <FileName>GA\Mutations\RandomSwap.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RobotSimulationController.NN.AbstractNN" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAJAAQAAAAAAEAAAAQAAAAAAAAIEACQAAAAAA=</HashCode>
+      <FileName>NN\AbstractNN.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RobotSimulationController.NN.NetworkFactory" Collapsed="true">
+    <Position X="14.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAgAAAACAAAAAAAAAAAAAAAAAABAAAAAAAAAA=</HashCode>
+      <FileName>NN\Topologies\NetworkFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RobotSimulationController.NN.Neuron" Collapsed="true">
+    <Position X="16" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AMAAACAAAQAAAAAAAAgAAAAAEAAAAAAAAAEgAAAAAAA=</HashCode>
+      <FileName>NN\Neuron.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RobotSimulationController.NN.HopfieldNetwork" Collapsed="true">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>NN\Topologies\HopfieldNetwork.cs</FileName>
+      <NewMemberFileName>NN\Topologies\ElmanNetwork.cs</NewMemberFileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RobotSimulationController.NN.Synapse" Collapsed="true">
+    <Position X="10.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>NN\Synapse.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RobotSimulationController.NN.Activation.ActivationFunctionFactory" Collapsed="true">
+    <Position X="9" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAEAAAAAAAAAIAAAAAAAAAAAAA=</HashCode>
+      <FileName>NN\ActivationFunction\ActivationFunctionFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RobotSimulationController.NN.Activation.ClassicSigmoid" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="12.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>NN\ActivationFunction\ClassicSigmoid.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Orientation="Left" Position="0.172" Collapsed="true" />
+  </Class>
+  <Class Name="RobotSimulationController.NN.Activation.Sigmoid" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="9" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>NN\ActivationFunction\Sigmoid.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RobotSimulationController.Properties.Resources" Collapsed="true">
+    <Position X="14.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABEAAAAQAAAAAAAAAAAAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RobotSimulationController.Properties.Settings" Collapsed="true">
+    <Position X="16" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAIAAAEAAARAAEAIBAIAAgAQABAAAAAEAABAAACAA=</HashCode>
+      <FileName>Settings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="RobotSimulationController.RobotType" Collapsed="true">
+    <Position X="9" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Enums.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="RobotSimulationController.NetworkType" Collapsed="true">
+    <Position X="16" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAEAAAAAAAAABAAAAAAQAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Enums.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="RobotSimulationController.ActivationFuctionType" Collapsed="true">
+    <Position X="9" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAEAAAAAAA=</HashCode>
+      <FileName>Enums.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="RobotSimulationController.FitnessFunctionType" Collapsed="true">
+    <Position X="12.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAA=</HashCode>
+      <FileName>Enums.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="RobotSimulationController.MutationType" Collapsed="true">
+    <Position X="14.25" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Enums.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="RobotSimulationController.CrossoverType" Collapsed="true">
+    <Position X="10.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Enums.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -43,11 +43,7 @@ namespace RobotSimulationController.GA
                 Thread.Sleep(GENERATION_LIFE_TIME);
                 IndividThread.RequestStop();
                 // Evaluate individual
-
-
-
-
-
+              //  Console.WriteLine(robot.Genotype.ToString());
                 robot.FitnessValue = IndividThread.GetFitness(fitness);
 
             });

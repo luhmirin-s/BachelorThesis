@@ -9,19 +9,19 @@ namespace RobotSimulationController.NN.Activation
     class ActivationFunctionFactory
     {
 
-        public static IActivationFunction CreateDefaultFunction()
+        public static ActivationFunction CreateDefaultFunction()
         {
             return CreateFunction((ActivationFuctionType) Settings.Default.UsedActivationFunction);
         }
 
-        public static IActivationFunction CreateFunction(ActivationFuctionType type) 
+        public static ActivationFunction CreateFunction(ActivationFuctionType type) 
         {
             switch (type)
             {
                 case ActivationFuctionType.Sigmoid:
                     return new Sigmoid();
                 default:
-                    return new ClassicSigmoid();
+                    return new Tanh();
             }
         }
 

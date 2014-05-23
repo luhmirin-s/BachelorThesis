@@ -30,7 +30,7 @@ namespace RobotSimulationController.NN
             set;
         }
 
-        public IActivationFunction ActivationFunction
+        public ActivationFunction ActivationFunction
         {
             get;
             set;
@@ -65,6 +65,7 @@ namespace RobotSimulationController.NN
 
             Value += Bias * BiasWeight;
             Value = ActivationFunction.Compute(Value);
+            
         }
 
     }

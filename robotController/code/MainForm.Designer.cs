@@ -45,16 +45,16 @@ namespace RobotSimulationController
             this.labelFitness = new System.Windows.Forms.Label();
             this.groupTypes = new System.Windows.Forms.GroupBox();
             this.groupParameters = new System.Windows.Forms.GroupBox();
-            this.textGenerationCount = new System.Windows.Forms.MaskedTextBox();
-            this.textLifeTime = new System.Windows.Forms.MaskedTextBox();
-            this.textPopulationSize = new System.Windows.Forms.MaskedTextBox();
-            this.textMutationProbability = new System.Windows.Forms.MaskedTextBox();
-            this.textEliteSize = new System.Windows.Forms.MaskedTextBox();
-            this.labelGenerationCount = new System.Windows.Forms.Label();
-            this.labelLifeTime = new System.Windows.Forms.Label();
-            this.labelPopulationSize = new System.Windows.Forms.Label();
-            this.labelEliteSize = new System.Windows.Forms.Label();
             this.labelMutationProbability = new System.Windows.Forms.Label();
+            this.labelEliteSize = new System.Windows.Forms.Label();
+            this.labelPopulationSize = new System.Windows.Forms.Label();
+            this.labelLifeTime = new System.Windows.Forms.Label();
+            this.labelGenerationCount = new System.Windows.Forms.Label();
+            this.textEliteSize = new System.Windows.Forms.MaskedTextBox();
+            this.textMutationProbability = new System.Windows.Forms.MaskedTextBox();
+            this.textPopulationSize = new System.Windows.Forms.MaskedTextBox();
+            this.textLifeTime = new System.Windows.Forms.MaskedTextBox();
+            this.textGenerationCount = new System.Windows.Forms.MaskedTextBox();
             this.groupTypes.SuspendLayout();
             this.groupParameters.SuspendLayout();
             this.SuspendLayout();
@@ -113,7 +113,11 @@ namespace RobotSimulationController
             this.comboRobot.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.comboRobot.FormattingEnabled = true;
             this.comboRobot.Items.AddRange(new object[] {
-            "Simple - One Layer"});
+            "One Layer Perceptrone",
+            "Two Layer Perceptron",
+            "Three Layer Perceptrone",
+            "Elman Network",
+            "Hopfield Network"});
             this.comboRobot.Location = new System.Drawing.Point(134, 19);
             this.comboRobot.Name = "comboRobot";
             this.comboRobot.Size = new System.Drawing.Size(163, 21);
@@ -158,8 +162,8 @@ namespace RobotSimulationController
             this.comboFitness.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.comboFitness.FormattingEnabled = true;
             this.comboFitness.Items.AddRange(new object[] {
-            "Max position",
-            "Complicated"});
+            "Aggregate",
+            "Tailored"});
             this.comboFitness.Location = new System.Drawing.Point(134, 127);
             this.comboFitness.Name = "comboFitness";
             this.comboFitness.Size = new System.Drawing.Size(163, 21);
@@ -171,8 +175,8 @@ namespace RobotSimulationController
             this.comboActivation.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.comboActivation.FormattingEnabled = true;
             this.comboActivation.Items.AddRange(new object[] {
-            "Classic Sigmoid",
-            "Modified Sigmoid"});
+            "Sigmoid",
+            "Tanh"});
             this.comboActivation.Location = new System.Drawing.Point(134, 46);
             this.comboActivation.Name = "comboActivation";
             this.comboActivation.Size = new System.Drawing.Size(163, 21);
@@ -250,76 +254,14 @@ namespace RobotSimulationController
             this.groupParameters.TabIndex = 17;
             this.groupParameters.TabStop = false;
             // 
-            // textGenerationCount
+            // labelMutationProbability
             // 
-            this.textGenerationCount.Location = new System.Drawing.Point(254, 19);
-            this.textGenerationCount.Mask = "00000";
-            this.textGenerationCount.Name = "textGenerationCount";
-            this.textGenerationCount.Size = new System.Drawing.Size(43, 20);
-            this.textGenerationCount.TabIndex = 1;
-            this.textGenerationCount.ValidatingType = typeof(int);
-            // 
-            // textLifeTime
-            // 
-            this.textLifeTime.Location = new System.Drawing.Point(254, 45);
-            this.textLifeTime.Mask = "00000";
-            this.textLifeTime.Name = "textLifeTime";
-            this.textLifeTime.Size = new System.Drawing.Size(43, 20);
-            this.textLifeTime.TabIndex = 2;
-            this.textLifeTime.ValidatingType = typeof(int);
-            // 
-            // textPopulationSize
-            // 
-            this.textPopulationSize.Location = new System.Drawing.Point(254, 71);
-            this.textPopulationSize.Mask = "00000";
-            this.textPopulationSize.Name = "textPopulationSize";
-            this.textPopulationSize.Size = new System.Drawing.Size(43, 20);
-            this.textPopulationSize.TabIndex = 3;
-            this.textPopulationSize.ValidatingType = typeof(int);
-            // 
-            // textMutationProbability
-            // 
-            this.textMutationProbability.Location = new System.Drawing.Point(254, 123);
-            this.textMutationProbability.Mask = "\\0.00";
-            this.textMutationProbability.Name = "textMutationProbability";
-            this.textMutationProbability.Size = new System.Drawing.Size(43, 20);
-            this.textMutationProbability.TabIndex = 4;
-            // 
-            // textEliteSize
-            // 
-            this.textEliteSize.Location = new System.Drawing.Point(254, 97);
-            this.textEliteSize.Mask = "00000";
-            this.textEliteSize.Name = "textEliteSize";
-            this.textEliteSize.Size = new System.Drawing.Size(43, 20);
-            this.textEliteSize.TabIndex = 6;
-            this.textEliteSize.ValidatingType = typeof(int);
-            // 
-            // labelGenerationCount
-            // 
-            this.labelGenerationCount.AutoSize = true;
-            this.labelGenerationCount.Location = new System.Drawing.Point(11, 22);
-            this.labelGenerationCount.Name = "labelGenerationCount";
-            this.labelGenerationCount.Size = new System.Drawing.Size(113, 13);
-            this.labelGenerationCount.TabIndex = 16;
-            this.labelGenerationCount.Text = "Max generation count:";
-            // 
-            // labelLifeTime
-            // 
-            this.labelLifeTime.AutoSize = true;
-            this.labelLifeTime.Location = new System.Drawing.Point(11, 48);
-            this.labelLifeTime.Name = "labelLifeTime";
-            this.labelLifeTime.Size = new System.Drawing.Size(127, 13);
-            this.labelLifeTime.TabIndex = 17;
-            this.labelLifeTime.Text = "Generation life time in ms:";
-            // 
-            // labelPopulationSize
-            // 
-            this.labelPopulationSize.AutoSize = true;
-            this.labelPopulationSize.Location = new System.Drawing.Point(11, 74);
-            this.labelPopulationSize.Name = "labelPopulationSize";
-            this.labelPopulationSize.Size = new System.Drawing.Size(81, 13);
-            this.labelPopulationSize.TabIndex = 18;
-            this.labelPopulationSize.Text = "Population size:";
+            this.labelMutationProbability.AutoSize = true;
+            this.labelMutationProbability.Location = new System.Drawing.Point(11, 126);
+            this.labelMutationProbability.Name = "labelMutationProbability";
+            this.labelMutationProbability.Size = new System.Drawing.Size(101, 13);
+            this.labelMutationProbability.TabIndex = 20;
+            this.labelMutationProbability.Text = "Mutation probability:";
             // 
             // labelEliteSize
             // 
@@ -330,14 +272,76 @@ namespace RobotSimulationController
             this.labelEliteSize.TabIndex = 19;
             this.labelEliteSize.Text = "Elite size:";
             // 
-            // labelMutationProbability
+            // labelPopulationSize
             // 
-            this.labelMutationProbability.AutoSize = true;
-            this.labelMutationProbability.Location = new System.Drawing.Point(11, 126);
-            this.labelMutationProbability.Name = "labelMutationProbability";
-            this.labelMutationProbability.Size = new System.Drawing.Size(101, 13);
-            this.labelMutationProbability.TabIndex = 20;
-            this.labelMutationProbability.Text = "Mutation probability:";
+            this.labelPopulationSize.AutoSize = true;
+            this.labelPopulationSize.Location = new System.Drawing.Point(11, 74);
+            this.labelPopulationSize.Name = "labelPopulationSize";
+            this.labelPopulationSize.Size = new System.Drawing.Size(81, 13);
+            this.labelPopulationSize.TabIndex = 18;
+            this.labelPopulationSize.Text = "Population size:";
+            // 
+            // labelLifeTime
+            // 
+            this.labelLifeTime.AutoSize = true;
+            this.labelLifeTime.Location = new System.Drawing.Point(11, 48);
+            this.labelLifeTime.Name = "labelLifeTime";
+            this.labelLifeTime.Size = new System.Drawing.Size(127, 13);
+            this.labelLifeTime.TabIndex = 17;
+            this.labelLifeTime.Text = "Generation life time in ms:";
+            // 
+            // labelGenerationCount
+            // 
+            this.labelGenerationCount.AutoSize = true;
+            this.labelGenerationCount.Location = new System.Drawing.Point(11, 22);
+            this.labelGenerationCount.Name = "labelGenerationCount";
+            this.labelGenerationCount.Size = new System.Drawing.Size(113, 13);
+            this.labelGenerationCount.TabIndex = 16;
+            this.labelGenerationCount.Text = "Max generation count:";
+            // 
+            // textEliteSize
+            // 
+            this.textEliteSize.Location = new System.Drawing.Point(254, 97);
+            this.textEliteSize.Mask = "00000";
+            this.textEliteSize.Name = "textEliteSize";
+            this.textEliteSize.Size = new System.Drawing.Size(43, 20);
+            this.textEliteSize.TabIndex = 6;
+            this.textEliteSize.ValidatingType = typeof(int);
+            // 
+            // textMutationProbability
+            // 
+            this.textMutationProbability.Location = new System.Drawing.Point(254, 123);
+            this.textMutationProbability.Mask = "\\0.00";
+            this.textMutationProbability.Name = "textMutationProbability";
+            this.textMutationProbability.Size = new System.Drawing.Size(43, 20);
+            this.textMutationProbability.TabIndex = 4;
+            // 
+            // textPopulationSize
+            // 
+            this.textPopulationSize.Location = new System.Drawing.Point(254, 71);
+            this.textPopulationSize.Mask = "00000";
+            this.textPopulationSize.Name = "textPopulationSize";
+            this.textPopulationSize.Size = new System.Drawing.Size(43, 20);
+            this.textPopulationSize.TabIndex = 3;
+            this.textPopulationSize.ValidatingType = typeof(int);
+            // 
+            // textLifeTime
+            // 
+            this.textLifeTime.Location = new System.Drawing.Point(254, 45);
+            this.textLifeTime.Mask = "00000";
+            this.textLifeTime.Name = "textLifeTime";
+            this.textLifeTime.Size = new System.Drawing.Size(43, 20);
+            this.textLifeTime.TabIndex = 2;
+            this.textLifeTime.ValidatingType = typeof(int);
+            // 
+            // textGenerationCount
+            // 
+            this.textGenerationCount.Location = new System.Drawing.Point(254, 19);
+            this.textGenerationCount.Mask = "00000";
+            this.textGenerationCount.Name = "textGenerationCount";
+            this.textGenerationCount.Size = new System.Drawing.Size(43, 20);
+            this.textGenerationCount.TabIndex = 1;
+            this.textGenerationCount.ValidatingType = typeof(int);
             // 
             // MainForm
             // 
@@ -352,7 +356,7 @@ namespace RobotSimulationController
             this.Controls.Add(this.labelTitle);
             this.Controls.Add(this.textBoxMODAServer);
             this.Name = "MainForm";
-            this.Text = "Mega robot controller";
+            this.Text = "Neuroevolution controller";
             this.groupTypes.ResumeLayout(false);
             this.groupTypes.PerformLayout();
             this.groupParameters.ResumeLayout(false);

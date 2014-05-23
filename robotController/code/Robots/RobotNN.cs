@@ -47,6 +47,7 @@ namespace RobotSimulationController
 
             float[] results = Network.SetInputValuesAndCompute(sensors);
 
+          //  Console.WriteLine(sensors[0] + " " + sensors[1] + " | " + results[0] + " " + results[1]);
             // Here we send motor speeds to form.
             SetNewMotorSpeeds(results);
             PostPosition();

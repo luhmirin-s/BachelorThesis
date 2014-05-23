@@ -19,9 +19,9 @@ namespace RobotSimulationController.GA.Fitness
             switch (type)
             {
                 case FitnessFunctionType.PositionToEnd:
-                    return new MaxPosition();
+                    return new Aggregate();
                 default:
-                    return new MaxPosition();
+                    return new Tailored();
             }
         }
 
